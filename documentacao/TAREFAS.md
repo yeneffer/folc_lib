@@ -19,7 +19,7 @@ Rastreador de evolução do desenvolvimento. Ordem obrigatória: **backend prime
 
 | Fase | Bloco | Status |
 |---|---|---|
-| 0 | Fundação (infra, banco, auth base) | ⬜ Não iniciado |
+| 0 | Fundação (infra, banco, auth base) | ✅ Concluído |
 | 1 | Backend — domínios essenciais | ⬜ Não iniciado |
 | 2 | Backend — domínios importantes/desejáveis | ⬜ Não iniciado |
 | 3 | Frontend — modularização e telas | ⬜ Não iniciado |
@@ -32,11 +32,11 @@ Rastreador de evolução do desenvolvimento. Ordem obrigatória: **backend prime
 
 Pré-requisito de tudo. Sem isso nenhum módulo de domínio compila/roda.
 
-- [ ] **F0.1 — Modelagem do banco.** Criar migration com todas as tabelas de [CONTRATOS-API.md#modelo-de-dados](./CONTRATOS-API.md#modelo-de-dados): `profiles`, `terms_acceptances`, `contents`, `categories`, `content_categories`, `curation_reviews`, `contributions`, `classes`, `class_students`, `assignments`, `assignment_progress`, `content_access_history`, `favorites`, `faq`, `error_reports`. RLS habilitado + políticas por perfil. (`supabase/migrations/0002_schema.sql`) — RE técnico Postgres
-- [ ] **F0.2 — Módulo `common`.** Envelope de resposta, `HttpExceptionFilter`, `ResponseInterceptor`, DTO de paginação, `@Roles()` decorator. — base p/ NF03
-- [ ] **F0.3 — Auth base.** `SupabaseAuthGuard` (valida JWT do Supabase), `RolesGuard` (RBAC por `profiles.role`). Integração Supabase Auth no `auth` module. — RF01/RF02
-- [ ] **F0.4 — Seed.** Categorias iniciais (costumes, folclore, gastronômica) + FAQ inicial + usuários de teste por perfil. — RF08/NF02
-- [ ] **F0.5 — Tipos compartilhados.** Criar `frontend/src/types/` espelhando enums e entities do contrato. — base do front
+- [x] **F0.1 — Modelagem do banco.** Migration com todas as tabelas de [CONTRATOS-API.md#modelo-de-dados](./CONTRATOS-API.md#modelo-de-dados): `profiles`, `terms_acceptances`, `contents`, `categories`, `content_categories`, `curation_reviews`, `contributions`, `classes`, `class_students`, `assignments`, `assignment_progress`, `content_access_history`, `favorites`, `faq`, `error_reports`. RLS habilitado + políticas por perfil. (`supabase/migrations/0002_schema.sql`) — RE técnico Postgres · branch `F0.1/modelagem-do-banco`
+- [x] **F0.2 — Módulo `common`.** Envelope de resposta, `HttpExceptionFilter`, `ResponseInterceptor`, DTO de paginação, `@Roles()` decorator. — base p/ NF03 · branch `F0.2/modulo-common`
+- [x] **F0.3 — Auth base.** `SupabaseAuthGuard` (valida JWT do Supabase), `OptionalAuthGuard`, `RolesGuard` (RBAC por `profiles.role`), `CurrentUser` decorator, `AuthService`. — RF01/RF02 · branch `F0.3/auth-base`
+- [x] **F0.4 — Seed.** Categorias iniciais (costumes, folclore, gastronômica) + FAQ inicial + usuários de teste por perfil. (`supabase/migrations/0003_seed.sql`) — RF08/NF02 · branch `F0.4/seed`
+- [x] **F0.5 — Tipos compartilhados.** `frontend/src/types/` espelhando enums e entities do contrato. — base do front · branch `F0.5/tipos-compartilhados`
 
 ---
 

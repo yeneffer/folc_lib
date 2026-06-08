@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card } from '@/components/ui';
+import { Recommendations } from '@/features/recommendations';
 
 const DESTAQUES = [
   { href: '/acervo', titulo: 'Explorar o acervo', desc: 'Vídeos, lendas, poemas, receitas e mais.' },
@@ -31,6 +32,8 @@ export default function Home() {
           </Link>
         ))}
       </div>
+
+      <Recommendations />
     </main>
   );
 }

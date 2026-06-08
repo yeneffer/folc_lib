@@ -1,47 +1,36 @@
-async function getBackendHealth() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001';
-  try {
-    const res = await fetch(`${apiUrl}/api/health`, { cache: 'no-store' });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
-}
+import Link from 'next/link';
+import { Card } from '@/components/ui';
 
-export default async function Home() {
-  const health = await getBackendHealth();
+const DESTAQUES = [
+  { href: '/acervo', titulo: 'Explorar o acervo', desc: 'Vídeos, lendas, poemas, receitas e mais.' },
+  { href: '/colaborar', titulo: 'Colaborar', desc: 'Envie produções da sua comunidade.' },
+  { href: '/faq', titulo: 'Dúvidas', desc: 'Perguntas frequentes sobre a plataforma.' },
+];
 
+export default function Home() {
   return (
-    <main
-      style={{
-        fontFamily: 'system-ui, sans-serif',
-        maxWidth: 640,
-        margin: '4rem auto',
-        padding: '0 1rem',
-      }}
-    >
-      <h1>FolcLib</h1>
-      <p>Stack: Next.js + NestJS + Supabase (Docker)</p>
-
-      <h2>Status do backend</h2>
-      {health ? (
-        <pre
-          style={{
-            background: '#f4f4f5',
-            padding: '1rem',
-            borderRadius: 8,
-            overflowX: 'auto',
-          }}
-        >
-          {JSON.stringify(health, null, 2)}
-        </pre>
-      ) : (
-        <p style={{ color: '#b91c1c' }}>
-          Backend indisponivel. Verifique se o servico <code>backend</code> esta
-          rodando.
+    <main className="container page">
+      <section style={{ marginBottom: '2rem' }}>
+        <h1 style={{ marginBottom: '0.5rem' }}>FolcLib</h1>
+        <p className="muted" style={{ maxWidth: 640 }}>
+          Plataforma educacional colaborativa sobre cultura e folclore
+          brasileiro. Explore o acervo, monte trilhas e contribua com o
+          patrimônio cultural.
         </p>
-      )}
+      </section>
+
+      <div className="grid">
+        {DESTAQUES.map((d) => (
+          <Link key={d.href} href={d.href} style={{ textDecoration: 'none' }}>
+            <Card>
+              <h3 style={{ marginTop: 0 }}>{d.titulo}</h3>
+              <p className="muted" style={{ margin: 0 }}>
+                {d.desc}
+              </p>
+            </Card>
+          </Link>
+        ))}
+      </div>
     </main>
   );
 }

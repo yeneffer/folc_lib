@@ -8,6 +8,7 @@ import { CommonModule } from './common/common.module';
 import { ContentModule } from './content/content.module';
 import { ContributionsModule } from './contributions/contributions.module';
 import { CurationModule } from './curation/curation.module';
+import { OfflineModule } from './offline/offline.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
 import { SupabaseModule } from './supabase/supabase.module';
 import { SupportModule } from './support/support.module';
@@ -26,6 +27,7 @@ import { UsersModule } from './users/users.module';
     ClassesModule,
     RecommendationsModule,
     SupportModule,
+    OfflineModule,
   ],
   controllers: [AppController],
   providers: [AppService],

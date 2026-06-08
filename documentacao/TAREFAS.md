@@ -21,7 +21,7 @@ Rastreador de evolução do desenvolvimento. Ordem obrigatória: **backend prime
 |---|---|---|
 | 0 | Fundação (infra, banco, auth base) | ✅ Concluído |
 | 1 | Backend — domínios essenciais | ✅ Concluído |
-| 2 | Backend — domínios importantes/desejáveis | ⬜ Não iniciado |
+| 2 | Backend — domínios importantes/desejáveis | ✅ Concluído |
 | 3 | Frontend — modularização e telas | ⬜ Não iniciado |
 | 4 | Infra de produção (Nginx, TLS, LGPD) | ⬜ Não iniciado |
 | 5 | Qualidade (testes e2e, acessibilidade) | ⬜ Não iniciado |
@@ -70,28 +70,28 @@ Pré-requisito de tudo. Sem isso nenhum módulo de domínio compila/roda.
 
 # FASE 2 — Backend: importantes e desejáveis
 
-## B4 — Contribuições (RF05) 🟡
-- [ ] B4.1 — `POST /contributions` (aceita visitante com nome/e-mail de contato + upload no Storage). 🟡
-- [ ] B4.2 — Encaminhamento à curadoria (cria `content` em `em_avaliacao` ao aprovar). 🟡
-- [ ] B4.3 — `GET /contributions/me`. 🟡
-- [ ] B4.4 — Validação de formato de arquivo (fluxo alternativo RF05). 🟡
+## B4 — Contribuições (RF05) 🟡 · branch `B4/contribuicoes`
+- [x] B4.1 — `POST /contributions` (aceita visitante com nome/e-mail de contato; arquivos pré-enviados ao Storage). 🟡
+- [x] B4.2 — Encaminhamento à curadoria: `POST /contributions/:id/approve` cria `content` em `em_avaliacao`; `/queue` e `/reject`. 🟡
+- [x] B4.3 — `GET /contributions/me`. 🟡
+- [x] B4.4 — Validação de formato de arquivo via allowlist (fluxo alternativo RF05). 🟡
 
-## B5 — Turmas & Progresso (DesignPdf professor) 🟡
-- [ ] B5.1 — CRUD `/classes` + `/classes/:id/students`. 🟡
-- [ ] B5.2 — `/classes/:id/assignments` (prazos) + `PATCH /assignments/:id/progress`. 🟡
-- [ ] B5.3 — `GET /classes/:id/progress` (acompanhamento do professor). 🟡
-- [ ] B5.4 — `GET /me/history`. 🟡
+## B5 — Turmas & Progresso (DesignPdf professor) 🟡 · branch `B5/turmas-e-progresso`
+- [x] B5.1 — CRUD `/classes` + `/classes/:id/students` (por id ou e-mail). 🟡
+- [x] B5.2 — `/classes/:id/assignments` (prazos) + `PATCH /assignments/:id/progress`. 🟡
+- [x] B5.3 — `GET /classes/:id/progress` (acompanhamento do professor). 🟡
+- [x] B5.4 — `GET /me/history`. 🟡
 
-## B6 — Recomendações (RF07) 🟢
-- [ ] B6.1 — `GET /recommendations` por histórico. 🟢
-- [ ] B6.2 — Fallback por popularidade (sem login/sem histórico). 🟢
+## B6 — Recomendações (RF07) 🟢 · branch `B6/recomendacoes`
+- [x] B6.1 — `GET /recommendations` por histórico. 🟢
+- [x] B6.2 — Fallback por popularidade (sem login/sem histórico). 🟢
 
-## B7 — Suporte (NF02, NF04) 🟡
-- [ ] B7.1 — `GET /faq`. 🟡
-- [ ] B7.2 — `POST /error-reports`. 🟡
+## B7 — Suporte (NF02, NF04) 🟡 · branch `B7/suporte`
+- [x] B7.1 — `GET /faq`. 🟡
+- [x] B7.2 — `POST /error-reports`. 🟡
 
-## B8 — Offline (RF06) 🟢
-- [ ] B8.1 — `POST/GET /me/offline`. 🟢
+## B8 — Offline (RF06) 🟢 · branch `B8/offline`
+- [x] B8.1 — `POST/GET/DELETE /me/offline/:contentId`. 🟢
 
 ---
 

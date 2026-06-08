@@ -22,7 +22,7 @@ Rastreador de evolução do desenvolvimento. Ordem obrigatória: **backend prime
 | 0 | Fundação (infra, banco, auth base) | ✅ Concluído |
 | 1 | Backend — domínios essenciais | ✅ Concluído |
 | 2 | Backend — domínios importantes/desejáveis | ✅ Concluído |
-| 3 | Frontend — modularização e telas | ⬜ Não iniciado |
+| 3 | Frontend — modularização e telas | ✅ Concluído |
 | 4 | Infra de produção (Nginx, TLS, LGPD) | ⬜ Não iniciado |
 | 5 | Qualidade (testes e2e, acessibilidade) | ⬜ Não iniciado |
 
@@ -99,42 +99,42 @@ Pré-requisito de tudo. Sem isso nenhum módulo de domínio compila/roda.
 
 > Só inicia o módulo após o backend correspondente estar pronto (coluna "Depende de"). Estrutura modular conforme [ARQUITETURA.md](./ARQUITETURA.md#frontend--nextjs-modularizado-por-feature).
 
-## F-INFRA — Base do frontend
-- [ ] FI.1 — `lib/apiClient` (fetch tipado + injeção do Bearer + tratamento do envelope de erro). Depende de: F0.5
-- [ ] FI.2 — Design system base em `components/` (Button, Input, Card, Modal, Table, Badge). Depende de: —
-- [ ] FI.3 — `useAuth` + guards de rota por perfil + layout/shell (Main, Navegação, Profile dropdown). Depende de: B1
+## F-INFRA — Base do frontend · branch `FI/base-frontend`
+- [x] FI.1 — `lib/apiClient` (fetch tipado + injeção do Bearer + tratamento do envelope de erro). Depende de: F0.5
+- [x] FI.2 — Design system base em `components/ui` (Button, Field/Textarea/Select, Card, Badge, Alert, Spinner). Depende de: —
+- [x] FI.3 — `useAuth`/`AuthProvider` + `RouteGuard` por perfil + shell (Navbar com dropdown de perfil). Depende de: B1
 
-## F1 — Auth (RF01) — telas: log in, Criar conta, Esqueci senha, Email enviado
-- [ ] F1.1 — Feature `auth`: login/cadastro/reset consumindo B1. Depende de: B1
-- [ ] F1.2 — Aceite de termos no cadastro (NF05). Depende de: B1
+## F1 — Auth (RF01) — telas: log in, Criar conta, Esqueci senha, Email enviado · branch `F1/auth`
+- [x] F1.1 — Feature `auth`: login/cadastro/reset consumindo B1. Depende de: B1
+- [x] F1.2 — Aceite de termos no cadastro (NF05). Depende de: B1
 
-## F2 — Acervo (RF03, RF08) — telas: Acervo Categorias, Acervo completo, Categoria*, Container, Content Box, Table Template
-- [ ] F2.1 — Feature `acervo`: listagem + cards + paginação. Depende de: B2
-- [ ] F2.2 — Barra de filtros (tipo, categoria, estado, evento, comunidade, ano) + busca. Depende de: B2
-- [ ] F2.3 — Variante pedagógica (telas "pedag"). Depende de: B2
+## F2 — Acervo (RF03, RF08) · branch `F2/acervo`
+- [x] F2.1 — Feature `acervo`: listagem + cards + paginação. Depende de: B2
+- [x] F2.2 — Barra de filtros (tipo, categoria, estado, busca) + paginação. Depende de: B2
+- [x] F2.3 — Variante pedagógica (filtro pedagógico). Depende de: B2
 
-## F3 — Conteúdo (RF03) — telas: Visualização de conteúdo, Visualização receita, Visu Conteudo Pedag
-- [ ] F3.1 — Feature `content`: página de detalhe. Depende de: B2
-- [ ] F3.2 — Render de receita (metadata). Depende de: B2.5
+## F3 — Conteúdo (RF03) · branch `F3/conteudo`
+- [x] F3.1 — Feature `content`: página de detalhe + mídia. Depende de: B2
+- [x] F3.2 — Render de receita (metadata) + salvar offline (RF06). Depende de: B2.5
 
-## F4 — Curadoria (RF04) — painel do avaliador
-- [ ] F4.1 — Feature `curation`: fila + ações aprovar/ajustes/rejeitar. Depende de: B3
+## F4 — Curadoria (RF04) · branch `F4/curadoria`
+- [x] F4.1 — Feature `curation`: fila + ações aprovar/ajustes/rejeitar. Depende de: B3
 
-## F5 — Colaborar (RF05) — telas: Colaborar, ENVIAR COLAB, colab enviada
-- [ ] F5.1 — Feature `contributions`: formulário + upload + confirmação. Depende de: B4
+## F5 — Colaborar (RF05) · branch `F5/colaborar`
+- [x] F5.1 — Feature `contributions`: formulário + upload (Storage) + confirmação. Depende de: B4
 
-## F6 — Turmas (professor) — telas: Perfil professor*, conteudo dessa turma, Prazo calendar, prazo feito
-- [ ] F6.1 — Feature `classes`: turmas, alunos, calendário de prazos. Depende de: B5
-- [ ] F6.2 — Visão de progresso dos alunos. Depende de: B5.3
+## F6 — Turmas (professor) · branch `F6/turmas`
+- [x] F6.1 — Feature `classes`: turmas, alunos, prazos. Depende de: B5
+- [x] F6.2 — Visão de progresso dos alunos. Depende de: B5.3
 
-## F7 — Perfil (RF02) — telas: Perfil aluno, Perfil aluno segurança
-- [ ] F7.1 — Feature `profile`: dados + segurança. Depende de: B1.5
+## F7 — Perfil (RF02) · branch `F7/perfil`
+- [x] F7.1 — Feature `profile`: dados + segurança. Depende de: B1.5
 
-## F8 — Recomendações (RF07) — Main
-- [ ] F8.1 — Seção de recomendados na home. Depende de: B6
+## F8 — Recomendações (RF07) — Main · branch `F8/recomendacoes`
+- [x] F8.1 — Seção de recomendados na home. Depende de: B6
 
-## F9 — Suporte (NF02, NF04) — telas: F.A.Q., Relatar erro, Erro relatado, Sobre Nós
-- [ ] F9.1 — Feature `support`: FAQ + reportar erro + Sobre Nós. Depende de: B7
+## F9 — Suporte (NF02, NF04) · branch `F9/suporte`
+- [x] F9.1 — Feature `support`: FAQ + reportar erro + Sobre Nós. Depende de: B7
 
 ---
 

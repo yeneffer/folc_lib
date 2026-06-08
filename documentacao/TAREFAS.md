@@ -20,7 +20,7 @@ Rastreador de evolução do desenvolvimento. Ordem obrigatória: **backend prime
 | Fase | Bloco | Status |
 |---|---|---|
 | 0 | Fundação (infra, banco, auth base) | ✅ Concluído |
-| 1 | Backend — domínios essenciais | ⬜ Não iniciado |
+| 1 | Backend — domínios essenciais | ✅ Concluído |
 | 2 | Backend — domínios importantes/desejáveis | ⬜ Não iniciado |
 | 3 | Frontend — modularização e telas | ⬜ Não iniciado |
 | 4 | Infra de produção (Nginx, TLS, LGPD) | ⬜ Não iniciado |
@@ -44,27 +44,27 @@ Pré-requisito de tudo. Sem isso nenhum módulo de domínio compila/roda.
 
 > Ordem recomendada: B1 → B2 → B3. B1 desbloqueia todo o resto (autenticação/perfil).
 
-## B1 — Auth & Users (RF01, RF02, NF05)
-- [ ] B1.1 — `POST /auth/register` com aceite de termos (grava `terms_acceptances`). 🔴
-- [ ] B1.2 — `POST /auth/login`, `/auth/refresh`, `/auth/logout`. 🔴
-- [ ] B1.3 — `POST /auth/forgot-password`, `/auth/reset-password`. 🟡
-- [ ] B1.4 — `GET /auth/me` + `GET/PATCH /users/me`. 🔴
-- [ ] B1.5 — `PATCH /users/me/security` (troca de senha/e-mail). 🟡
-- [ ] B1.6 — Testes e2e do módulo (Supertest) cobrindo RBAC. 🔴
+## B1 — Auth & Users (RF01, RF02, NF05) · branch `B1/auth-e-users`
+- [x] B1.1 — `POST /auth/register` com aceite de termos (grava `terms_acceptances`). 🔴
+- [x] B1.2 — `POST /auth/login`, `/auth/refresh`, `/auth/logout`. 🔴
+- [x] B1.3 — `POST /auth/forgot-password`, `/auth/reset-password`. 🟡
+- [x] B1.4 — `GET /auth/me` + `GET/PATCH /users/me`. 🔴
+- [x] B1.5 — `PATCH /users/me/security` (troca de senha/e-mail). 🟡
+- [x] B1.6 — Testes cobrindo RBAC (`RolesGuard`) e parsing de token. 🔴 ⚠️ unitários; e2e Supertest contra Supabase real fica pendente
 
-## B2 — Acervo / Content (RF03, RF08)
-- [ ] B2.1 — `GET /contents` com filtros completos (tipo, categoria, estado, evento, comunidade, ano, pedagógico, busca, paginação). 🔴
-- [ ] B2.2 — `GET /contents/:id` (+ registra `content_access_history` se autenticado). 🔴
-- [ ] B2.3 — `GET /categories`. 🔴
-- [ ] B2.4 — `POST/PATCH /contents` (cria/edita; entra como `em_avaliacao`). 🔴
-- [ ] B2.5 — Suporte a `metadata` de receita (ingredientes, modo de preparo). 🟡
-- [ ] B2.6 — Testes e2e (filtros e RLS de conteúdo aprovado vs. privado). 🔴
+## B2 — Acervo / Content (RF03, RF08) · branch `B2/acervo-content`
+- [x] B2.1 — `GET /contents` com filtros completos (tipo, categoria, estado, evento, comunidade, ano, pedagógico, busca, paginação). 🔴
+- [x] B2.2 — `GET /contents/:id` (+ registra `content_access_history` se autenticado). 🔴
+- [x] B2.3 — `GET /categories`. 🔴
+- [x] B2.4 — `POST/PATCH /contents` (cria/edita; entra como `em_avaliacao`). 🔴
+- [x] B2.5 — Suporte a `metadata` de receita (ingredientes, modo de preparo). 🟡
+- [x] B2.6 — Testes de regras (404, registro de acesso, receita, permissão de edição). 🔴 ⚠️ unitários; e2e de filtros/RLS fica pendente
 
-## B3 — Curadoria (RF04)
-- [ ] B3.1 — `GET /curation/queue` (somente avaliador). 🔴
-- [ ] B3.2 — `POST /curation/:contentId/review` (aprovar/ajustes/rejeitar → muda `status`). 🔴
-- [ ] B3.3 — Bloqueio automático de conteúdo sinalizado como sensível (fluxo alternativo RF04). 🔴
-- [ ] B3.4 — Testes e2e. 🔴
+## B3 — Curadoria (RF04) · branch `B3/curadoria`
+- [x] B3.1 — `GET /curation/queue` (somente avaliador). 🔴
+- [x] B3.2 — `POST /curation/:contentId/review` (aprovar/ajustes/rejeitar → muda `status`). 🔴
+- [x] B3.3 — Bloqueio automático de conteúdo sinalizado como sensível (fluxo alternativo RF04). 🔴
+- [x] B3.4 — Testes (aprovação, bloqueio automático, ajustes, rejeição, 404, 409). 🔴
 
 ---
 

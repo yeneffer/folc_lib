@@ -1,5 +1,5 @@
 import { api, type Page } from '@/lib/apiClient';
-import { supabase } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import type { Contribution, ContributionRequest } from '@/types';
 
 const BUCKET = 'contributions';
@@ -7,6 +7,7 @@ const BUCKET = 'contributions';
 export const contributionsService = {
   /** Sobe um arquivo ao Storage e devolve {nome, url} para o contrato. */
   async uploadFile(file: File): Promise<{ nome: string; url: string }> {
+    const supabase = getSupabase();
     const path = `${Date.now()}-${file.name}`;
     const { error } = await supabase.storage.from(BUCKET).upload(path, file);
     if (error) throw new Error(`Falha ao enviar ${file.name}: ${error.message}`);

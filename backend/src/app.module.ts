@@ -10,6 +10,7 @@ import { ContributionsModule } from './contributions/contributions.module';
 import { CurationModule } from './curation/curation.module';
 import { RecommendationsModule } from './recommendations/recommendations.module';
 import { SupabaseModule } from './supabase/supabase.module';
+import { SupportModule } from './support/support.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     ContributionsModule,
     ClassesModule,
     RecommendationsModule,
+    SupportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

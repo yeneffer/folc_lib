@@ -8,6 +8,7 @@ import { CommonModule } from './common/common.module';
 import { ContentModule } from './content/content.module';
 import { ContributionsModule } from './contributions/contributions.module';
 import { CurationModule } from './curation/curation.module';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 import { SupabaseModule } from './supabase/supabase.module';
 import { UsersModule } from './users/users.module';
 
@@ -22,6 +23,7 @@ import { UsersModule } from './users/users.module';
     CurationModule,
     ContributionsModule,
     ClassesModule,
+    RecommendationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

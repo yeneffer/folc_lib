@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { Navbar } from '@/components/layout/Navbar';
+import { Providers } from '@/components/layout/Providers';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'FolcLib',
-  description: 'NestJS + Next.js + Supabase',
+  description: 'Plataforma educacional sobre cultura e folclore brasileiro',
 };
 
 export default function RootLayout({
@@ -13,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

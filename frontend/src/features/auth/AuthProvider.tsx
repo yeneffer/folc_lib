@@ -17,6 +17,9 @@ interface AuthContextValue {
   login: (payload: LoginRequest) => Promise<void>;
   register: (payload: RegisterRequest) => Promise<void>;
   logout: () => Promise<void>;
+  /** Recarrega o perfil (apos editar dados/seguranca). */
+  refreshUser: () => Promise<void>;
+  setUser: (user: UserProfile) => void;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -51,9 +54,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await authService.logout();
     setUser(null);
   };
+  const refreshUser = async () => {
+    try {
+      setUser(await authService.me());
+    } catch {
+      setUser(null);
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, register, logout, refreshUser, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

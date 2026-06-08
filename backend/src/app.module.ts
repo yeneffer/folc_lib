@@ -3,9 +3,12 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { ClassesModule } from './classes/classes.module';
 import { CommonModule } from './common/common.module';
 import { ContentModule } from './content/content.module';
+import { ContributionsModule } from './contributions/contributions.module';
 import { CurationModule } from './curation/curation.module';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 import { SupabaseModule } from './supabase/supabase.module';
 import { UsersModule } from './users/users.module';
 
@@ -18,6 +21,9 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     ContentModule,
     CurationModule,
+    ContributionsModule,
+    ClassesModule,
+    RecommendationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

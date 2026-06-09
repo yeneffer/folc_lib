@@ -49,13 +49,6 @@ begin
   return new;
 end $$;
 
--- Retorna o papel do usuario autenticado (usado nas politicas RLS).
--- security definer para conseguir ler profiles sem recursao de RLS.
-create or replace function public.current_user_role()
-returns user_role language sql stable security definer set search_path = public as $$
-  select role from public.profiles where id = auth.uid()
-$$;
-
 -- ----------------------------------------------------------------------------
 -- profiles (RF02) — 1:1 com auth.users
 -- ----------------------------------------------------------------------------
@@ -80,6 +73,14 @@ do $$ begin
       references auth.users (id) on delete cascade;
   end if;
 end $$;
+
+-- Retorna o papel do usuario autenticado (usado nas politicas RLS).
+-- Definida apos profiles existir; security definer para ler profiles sem
+-- recursao de RLS.
+create or replace function public.current_user_role()
+returns user_role language sql stable security definer set search_path = public as $$
+  select role from public.profiles where id = auth.uid()
+$$;
 
 -- ----------------------------------------------------------------------------
 -- terms_acceptances (RF01, NF05, LGPD)

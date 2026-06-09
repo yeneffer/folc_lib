@@ -17,6 +17,7 @@ import { LoginDto } from './dto/login.dto';
 import { RefreshDto } from './dto/refresh.dto';
 import { RegisterDto } from './dto/register.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { OptionalAuthGuard } from './guards/optional-auth.guard';
 import { SupabaseAuthGuard } from './guards/supabase-auth.guard';
 import { AuthenticatedUser } from './types';
 
@@ -44,10 +45,13 @@ export class AuthController {
     return this.auth.refresh(dto.refreshToken);
   }
 
-  /** Encerra a sessao. */
+  /**
+   * Encerra a sessao. Auth opcional: o logout deve funcionar mesmo com token
+   * ausente ou expirado (revoga no servidor apenas se houver token valido).
+   */
   @Post('logout')
   @HttpCode(HttpStatus.NO_CONTENT)
-  @UseGuards(SupabaseAuthGuard)
+  @UseGuards(OptionalAuthGuard)
   async logout(@Req() req: Request) {
     const token = this.auth.extractToken(req);
     if (token) await this.auth.logout(token);

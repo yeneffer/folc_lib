@@ -33,8 +33,12 @@ export const authService = {
   },
 
   async logout(): Promise<void> {
+    // logout e local-first: encerra a sessao no cliente mesmo que a chamada
+    // ao servidor falhe (ex.: token ja expirado).
     try {
       await api.post('/auth/logout');
+    } catch {
+      // ignora erros do servidor
     } finally {
       tokenStorage.clear();
     }

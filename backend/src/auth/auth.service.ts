@@ -141,15 +141,16 @@ export class AuthService {
 
   /** Renova a sessao a partir do refresh token. */
   async refresh(refreshToken: string): Promise<AuthResponse> {
-    const client = this.supabase.getClient();
-    const { data, error } = await client.auth.refreshSession({
-      refresh_token: refreshToken,
-    });
+    // refresh no client isolado (grava sessao); DB no client service_role
+    const { data, error } = await this.supabase
+      .getAuthClient()
+      .auth.refreshSession({ refresh_token: refreshToken });
     if (error || !data?.session || !data.user) {
       throw new UnauthorizedException('Refresh token invalido ou expirado');
     }
 
-    const { data: profile, error: profileError } = await client
+    const { data: profile, error: profileError } = await this.supabase
+      .getClient()
       .from('profiles')
       .select('*')
       .eq('id', data.user.id)
@@ -201,11 +202,10 @@ export class AuthService {
   // ---------------------------------------------------------------------------
 
   private async signIn(email: string, senha: string): Promise<Session> {
-    const client = this.supabase.getClient();
-    const { data, error } = await client.auth.signInWithPassword({
-      email,
-      password: senha,
-    });
+    // client isolado: nao poluir o client service_role com a sessao do usuario
+    const { data, error } = await this.supabase
+      .getAuthClient()
+      .auth.signInWithPassword({ email, password: senha });
     if (error || !data?.session) {
       throw new UnauthorizedException('Credenciais invalidas');
     }

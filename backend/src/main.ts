@@ -1,3 +1,11 @@
+// Polyfill de WebSocket: o @supabase/realtime-js (transitivo) exige
+// WebSocket nativo, ausente no Node 20. O backend nao usa realtime, mas o
+// client o inicializa na construcao. Deve vir antes de qualquer createClient.
+import { WebSocket } from 'ws';
+if (!(globalThis as { WebSocket?: unknown }).WebSocket) {
+  (globalThis as { WebSocket?: unknown }).WebSocket = WebSocket;
+}
+
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';

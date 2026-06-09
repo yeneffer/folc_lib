@@ -5,6 +5,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 @Injectable()
 export class SupabaseService implements OnModuleInit {
   private client: SupabaseClient;
+  private authClient: SupabaseClient;
 
   constructor(private readonly config: ConfigService) {}
 
@@ -21,16 +22,28 @@ export class SupabaseService implements OnModuleInit {
       return;
     }
 
-    this.client = createClient(url, key, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
+    const opts = { auth: { persistSession: false, autoRefreshToken: false } };
+    // Client principal: admin + queries (service_role, BYPASSRLS).
+    this.client = createClient(url, key, opts);
+    // Client SEPARADO p/ login/refresh: signInWithPassword grava a sessao do
+    // usuario no client, o que rebaixaria o role das queries seguintes. Manter
+    // isolado preserva o client principal sempre como service_role.
+    this.authClient = createClient(url, key, opts);
   }
 
-  /** Cliente Supabase com a service role key (uso somente no servidor). */
+  /** Cliente service_role (admin + DB). Nunca fazer signIn aqui. */
   getClient(): SupabaseClient {
     if (!this.client) {
       throw new Error('Cliente Supabase nao inicializado. Verifique o .env.');
     }
     return this.client;
+  }
+
+  /** Cliente isolado para login/refresh de usuario (nao usar para DB). */
+  getAuthClient(): SupabaseClient {
+    if (!this.authClient) {
+      throw new Error('Cliente Supabase nao inicializado. Verifique o .env.');
+    }
+    return this.authClient;
   }
 }
